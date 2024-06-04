@@ -32,6 +32,8 @@ const createUser = async (req, res, next) => {
 const getAllUser = catchAsync(async (req, res, next) => {
     const result = await UserServices.getAllUserfromDb();
 
+    console.log(req.user._id);
+
     res.status(200).json({
         success: true,
         message: "User fetched successfully",
@@ -47,7 +49,7 @@ const getSingleUser = catchAsync(async (req, res, next) => {
     sendResponse(res, {
         statusCode: 200,
         success: true,
-        message: "Student fetched successfully",
+        message: "User fetched successfully",
         data: result,
     });
 });
@@ -60,7 +62,7 @@ const deleteUser = catchAsync(async (req, res, next) => {
     sendResponse(res, {
         statusCode: 200,
         success: true,
-        message: "Student delete successfully",
+        message: "User delete successfully",
     });
 });
 

@@ -113,16 +113,27 @@ const loginUser = async (email, password) => {
         throw new Error("Invalid password");
     }
 
-    const token = jwt.sign({ id: user._id }, config.jwt_secret_key, {
-        expiresIn: config.jwt_expires_in,
-    });
+    const token = jwt.sign(
+        { _id: user._id, email: user.email },
+        config.jwt_secret_key,
+        {
+            expiresIn: config.jwt_expires_in,
+        }
+    );
 
     return token;
 };
+
+const findById = async (id) => {
+    const result = await User.findById(id);
+    return result;
+};
+
 export const UserServices = {
     createUserInDB,
     getAllUserfromDb,
     getSingleUserFromDB,
     deleteuserfromDB,
     loginUser,
+    findById,
 };

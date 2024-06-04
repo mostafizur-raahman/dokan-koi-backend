@@ -1,10 +1,6 @@
 import Joi from "joi";
 
 const userValidationSchema = Joi.object({
-    id: Joi.string().required().messages({
-        "any.required": "ID is required.",
-        "string.empty": "ID cannot be empty.",
-    }),
     name: Joi.object({
         firstName: Joi.string().min(2).required().messages({
             "string.min":
@@ -37,48 +33,11 @@ const userValidationSchema = Joi.object({
     contactNo: Joi.string().required().messages({
         "any.required": "Contact number is required.",
     }),
-    emergencyContactNo: Joi.string().required().messages({
-        "any.required": "Emergency contact number is required.",
-    }),
-    bloodGroup: Joi.string()
-        .valid("A+", "A-", "B+", "B-", "AB+", "AB-", "O+", "O-")
-        .required()
-        .messages({
-            "any.only":
-                "Blood group must be one of A+, A-, B+, B-, AB+, AB-, O+, or O-.",
-            "any.required": "Blood group is required.",
-        }),
     presentAddress: Joi.string().required().messages({
         "any.required": "Present address is required.",
     }),
-    permanentAddress: Joi.string().required().messages({
-        "any.required": "Permanent address is required.",
-    }),
-    guardian: Joi.object({
-        fatherName: Joi.string().required().messages({
-            "any.required": "Father's name is required.",
-        }),
-        motherName: Joi.string().required().messages({
-            "any.required": "Mother's name is required.",
-        }),
-        fatherContactNo: Joi.string().required().messages({
-            "any.required": "Father's contact number is required.",
-        }),
-        motherContactNo: Joi.string().required().messages({
-            "any.required": "Mother's contact number is required.",
-        }),
-        fatherEmail: Joi.string().email().required().messages({
-            "string.email": "Father's email must be a valid email address.",
-            "any.required": "Father's email is required.",
-        }),
-        motherEmail: Joi.string().email().required().messages({
-            "string.email": "Mother's email must be a valid email address.",
-            "any.required": "Mother's email is required.",
-        }),
-    }).required(),
-    profileImage: Joi.string().required().messages({
-        "any.required": "Profile image is required.",
-    }),
+    permanentAddress: Joi.string(),
+    profileImage: Joi.string(),
     isDeleted: Joi.boolean().default(false),
 }).messages({
     "object.base": "Invalid input.", // If the input is not an object
